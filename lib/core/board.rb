@@ -1,14 +1,12 @@
-require 'cell'
+require 'core/cell'
 
 class Board
   attr_reader :grid
   attr_reader :capacity
-  attr_reader :empty_cell
 
   def initialize (size)
-    @empty_cell = Cell.new()
     @capacity = size*size
-    @grid = Array.new(capacity, empty_cell)
+    @grid = Array.new(capacity) {Cell.new()}
   end
 
   def mark (position, mark)
@@ -16,5 +14,8 @@ class Board
    @grid
   end
 
+  def is_full?
+    @grid.all? { |cell| !cell.is_empty? }
+  end
 end
 

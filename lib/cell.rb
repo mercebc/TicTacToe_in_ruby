@@ -1,7 +1,7 @@
 class Cell
-  attr_accessor :symbol
+  attr_accessor :value
 
   def initialize
-    @symbol = " "
+    @value = " "
   end
 end

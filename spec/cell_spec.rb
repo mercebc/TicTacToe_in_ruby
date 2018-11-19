@@ -7,8 +7,8 @@ describe Cell do
     expect(Cell.new()).to be_a(Cell)
   end
 
-  it 'has a symbol and it is empty by default' do
-    expect(Cell.new().symbol).to eq(" ")
+  it 'it is empty by default' do
+    expect(Cell.new().value).to eq(" ")
   end
 
 end

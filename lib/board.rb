@@ -3,7 +3,7 @@ require 'cell'
 class Board
   attr_reader :grid
   attr_reader :capacity
-  attr_accessor :empty_cell
+  attr_reader :empty_cell
 
   def initialize (size)
     @empty_cell = Cell.new()
@@ -12,7 +12,7 @@ class Board
   end
 
   def mark (position, mark)
-   @grid[position].symbol = mark
+   @grid[position].value = mark
    @grid
   end
 

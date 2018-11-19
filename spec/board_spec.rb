@@ -13,7 +13,7 @@ describe Board do
 
   it 'places a mark' do
     board.mark(0, "X")
-    expect(board.grid[0].symbol).to eq("X")
+    expect(board.grid[0].value).to eq("X")
   end
 
 end

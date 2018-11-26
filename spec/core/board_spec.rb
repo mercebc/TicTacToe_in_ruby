@@ -7,14 +7,18 @@ describe Board do
     @board = Board.new(3)
   end
 
-  it 'is an empty board size 3*3' do
-    expect(@board.grid.length).to eq(9)
+  it 'size is 3' do
+    expect(@board.size).to eq(3)
   end
 
-  it 'places a mark' do
-    @board.mark(0, "X")
-    expect(@board.grid[0].value).to eq("X")
-    expect(@board.grid[2].value).to eq(" ")
+  it 'has 9 available spaces' do
+    expect(@board.capacity).to eq(9)
+  end
+
+  it 'can mark itself with a symbol' do
+    @board.mark(1, "X")
+    expect(@board.grid[1].content).to eq("X")
+    expect(@board.grid[3].content).to eq(nil)
   end
 
   it 'is not full when some cells are empty' do

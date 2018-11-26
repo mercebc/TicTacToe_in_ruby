@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+# Allows you to require any file in lib
+$: << File.join(File.dirname(__FILE__), '..', 'lib')
+
+require 'UI/gameUI'
+require 'core/board'
+require 'core/flow'
+
+class Game
+  attr_reader :gameUI
+  attr_reader :board
+  attr_reader :flow
+
+  def initialize
+    @gameUI = GameUI.new
+    @board = Board.new(3)
+    @flow = Flow.new(@gameUI, @board)
+    @flow.start
+  end
+end
+
+Game.new

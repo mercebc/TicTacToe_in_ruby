@@ -1,4 +1,4 @@
-class GameUI
+class UI
   EMPTY = " "
   LINE = "---+---+---"
   PART = "|"
@@ -38,11 +38,17 @@ class GameUI
   end
 
   def get_position
-    int_from_user("Please insert the position ")
+    int_from_user("Please insert the position ") - 1
   end
 
   def get_symbol
     string_from_user("Please insert the symbol ")
   end
+
+  def show_error_message message
+    @out.print message
+  end
+
+  private :string_from_user, :int_from_user, :draw_cell
 
 end

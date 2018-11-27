@@ -15,6 +15,10 @@ describe Board do
     expect(@board.capacity).to eq(9)
   end
 
+  it 'can get a content of a cell' do
+    expect(@board.get_content(1)).to eq(nil)
+  end
+
   it 'can mark itself with a symbol' do
     @board.mark(1, "X")
     expect(@board.grid[1].content).to eq("X")
@@ -28,15 +32,10 @@ describe Board do
   end
 
   it 'is full when all cells have a value' do
-    @board.mark(0, "X")
-    @board.mark(1, "X")
-    @board.mark(2, "X")
-    @board.mark(3, "X")
-    @board.mark(4, "X")
-    @board.mark(5, "X")
-    @board.mark(6, "X")
-    @board.mark(7, "X")
-    @board.mark(8, "X")
+    capacity = @board.capacity - 1
+    for i in 0..capacity
+      @board.mark(i, "X")
+    end
     expect(@board.is_full?).to eq(true)
   end
 end

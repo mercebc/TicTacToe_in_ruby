@@ -1,17 +1,17 @@
-require 'UI/gameUI'
+require 'UI/UI'
 require 'core/board'
 
 class Flow
-  attr_reader :gameUI
+  attr_reader :ui
   attr_reader :board
 
-  def initialize (gameUI, board)
-    @gameUI = gameUI
+  def initialize (ui, board)
+    @ui = ui
     @board = board
   end
 
   def start
-    @gameUI.show_grid(@board)
+    @ui.show_grid(@board)
     while !@board.is_full?
       play
     end
@@ -19,13 +19,14 @@ class Flow
 
   def play
     position = 0
-    loop do
-      position = @gameUI.get_position
-      position  = position - 1
-      break if @board.grid[position].is_empty? == true
+    begin
+      position = @ui.get_position
+      raise ArgumentError.new("Please choose a different position where the cell is empty") if @board.grid[position].is_empty? == false
+    rescue ArgumentError => e
+      @ui.show_error_message(e.message)
+      position = @ui.get_position
     end
-    @board.mark(position, @gameUI.get_symbol)
-    @gameUI.show_grid(@board)
+    @board.mark(position, @ui.get_symbol)
+    @ui.show_grid(@board)
   end
-
 end

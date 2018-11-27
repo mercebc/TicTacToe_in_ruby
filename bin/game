@@ -2,19 +2,19 @@
 # Allows you to require any file in lib
 $: << File.join(File.dirname(__FILE__), '..', 'lib')
 
-require 'UI/gameUI'
+require 'UI/UI'
 require 'core/board'
 require 'core/flow'
 
 class Game
-  attr_reader :gameUI
+  attr_reader :ui
   attr_reader :board
   attr_reader :flow
 
   def initialize
-    @gameUI = GameUI.new
+    @ui = UI.new
     @board = Board.new(3)
-    @flow = Flow.new(@gameUI, @board)
+    @flow = Flow.new(@ui, @board)
     @flow.start
   end
 end

@@ -23,5 +23,9 @@ class Board
   def get_content position
     @grid[position].content
   end
+
+  def invalid_cell position
+    !@grid[position].is_empty?
+  end
 end
 

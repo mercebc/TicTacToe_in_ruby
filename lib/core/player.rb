@@ -11,12 +11,17 @@ class Player
   end
 
   def get_valid_position(board)
-    position = @ui.get_position
-    until board.grid[position].is_empty? do
-      @ui.show_error_message("Please choose a different position where the cell is empty\n")
-      position = @ui.get_position
-    end
-    position
+    validate_position(@ui.get_position, board)
   end
 
+  def validate_position(position, board)
+    board.invalid_cell(position) ? get_validated_position(board) : position
+  end
+
+  def get_validated_position(board)
+    @ui.show_error_message("Please choose a different position where the cell is empty\n")
+    get_valid_position(board)
+  end
+
+  private :validate_position, :get_validated_position
 end

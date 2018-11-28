@@ -37,4 +37,9 @@ describe Board do
     end
     expect(board.is_full?).to eq(true)
   end
+
+  it 'a cell that is not empty is invalid' do
+    board.mark(0, "X")
+    expect(board.invalid_cell(0)).to be true
+  end
 end

@@ -20,8 +20,8 @@ class Flow
   end
 
   def play
-    position = @players[0].get_valid_position(@board)
-    @board.mark(position, @players[0].symbol)
+    position = current_player.get_valid_position(@board)
+    @board.mark(position, current_player.symbol)
     @ui.show_grid(@board)
     swap_players
   end
@@ -29,4 +29,9 @@ class Flow
   def swap_players
     @players[0], @players[1] = @players[1], @players[0]
   end
+
+  def current_player
+    @players.first
+  end
+
 end

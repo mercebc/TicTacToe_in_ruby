@@ -1,7 +1,8 @@
 class UI
   EMPTY = " "
-  LINE = "---+---+---"
   PART = "|"
+  DIVIDER = "---"
+  PLUS = "+"
 
   def initialize(stdout = $stdout, stdin = $stdin)
     @out = stdout
@@ -13,9 +14,11 @@ class UI
     @in.gets.chomp
   end
 
-  def int_from_user message
-    @out.print message
-    @in.gets.chomp.to_i
+  def int_from_user
+    int = Integer @in.gets.chomp
+  rescue ArgumentError
+    show_error_message("Please insert a valid number ")
+    int_from_user
   end
 
   def draw_cell(board, position)
@@ -32,13 +35,18 @@ class UI
         @out.print PART if (col < size)
         position += 1
       end
-      @out.print "\n" + LINE if (row < size)
+      @out.print "\n"
+      for col in 1..size do
+        @out.print DIVIDER if (row < size)
+        @out.print PLUS if (col < size and row < size)
+      end
       @out.print "\n"
     end
   end
 
   def get_position
-    int_from_user("Please insert the position ") - 1
+    @out.print "Please insert the position "
+    int_from_user - 1
   end
 
   def get_symbol

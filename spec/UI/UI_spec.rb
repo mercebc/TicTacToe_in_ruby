@@ -1,49 +1,40 @@
 require 'rspec'
 require 'UI/UI'
 require 'core/board'
-require 'stringio'
-require 'o_stream_catcher'
 
 describe UI do
 
   before(:each) do
-    @string_io = StringIO.new
+    @user_input = StringIO.new
+    @output = StringIO.new
   end
 
   it 'can ask the user to introduce a symbol' do
-    result, stdout, stderr = OStreamCatcher.catch do
-    @string_io.puts 'X'
-    @string_io.rewind
-    ui = UI.new($stdout, @string_io)
+    @user_input = StringIO.new("X")
+    ui = UI.new(@output, @user_input)
     expect(ui.get_symbol).to eq("X")
-    end
   end
 
   it 'can ask the user to introduce a position' do
-    result, stdout, stderr = OStreamCatcher.catch do
-    @string_io.puts 2
-    @string_io.rewind
-    ui = UI.new($stdout, @string_io)
-    expect(ui.get_position).to eq(1)
-    end
+    @user_input = StringIO.new("1")
+    ui = UI.new(@output, @user_input)
+    expect(ui.get_position).to eq(0)
   end
 
   it 'can display an error message' do
-    result, stdout, stderr = OStreamCatcher.catch do
-    ui = UI.new(@string_io, $stdin)
+    @user_input = StringIO.new
+    ui = UI.new(@output, @user_input)
     ui.show_error_message("Error message")
-    expect(@string_io.string).to eq("Error message")
-    end
+    expect(@output.string).to eq("Error message")
   end
 
   it 'can show the grid' do
-    result, stdout, stderr = OStreamCatcher.catch do
-    ui = UI.new(@string_io, $stdin)
+    @user_input = StringIO.new
+    ui = UI.new(@output, @user_input)
     board = Board.new(3)
     board.mark(3,"X")
     ui.show_grid(board)
-    expect(@string_io.string).to eq("   |   |   \n---+---+---\n X |   |   \n---+---+---\n   |   |   \n")
-    end
+    expect(@output.string).to eq("   |   |   \n---+---+---\n X |   |   \n---+---+---\n   |   |   \n")
   end
 
 end

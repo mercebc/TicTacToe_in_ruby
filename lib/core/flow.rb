@@ -17,16 +17,17 @@ class Flow
     end
   end
 
-  def play
-    position = 0
-    begin
-      position = @ui.get_position
-      raise ArgumentError.new("Please choose a different position where the cell is empty") if @board.grid[position].is_empty? == false
-    rescue ArgumentError => e
-      @ui.show_error_message(e.message)
-      position = @ui.get_position
+  def get_valid_position
+    position = @ui.get_position
+    until @board.grid[position].is_empty? do
+    @ui.show_error_message("Please choose a different position where the cell is empty\n")
+    position = @ui.get_position
     end
-    @board.mark(position, @ui.get_symbol)
+    position
+  end
+
+  def play
+    @board.mark(get_valid_position, @ui.get_symbol)
     @ui.show_grid(@board)
   end
 end

@@ -32,15 +32,15 @@ class UI
     for row in 1..size do
       for col in 1..size do
         @out.print EMPTY + draw_cell(board, position) + EMPTY
-        @out.print PART if (col < size)
+        @out.print PART if col < size
         position += 1
       end
       @out.print "\n"
       for col in 1..size do
-        @out.print DIVIDER if (row < size)
+        @out.print DIVIDER if row < size
         @out.print PLUS if (col < size and row < size)
       end
-      @out.print "\n"if (row < size)
+      @out.print "\n" if row < size
     end
   end
 

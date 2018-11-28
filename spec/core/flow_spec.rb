@@ -11,7 +11,7 @@ describe Flow do
   end
 
   it 'can not place a symbol if the cell is not empty' do
-    @user_input = StringIO.new("1\nX\n1\n2\nX\n3\nX\n4\nX\n5\nX\n6\nX\n7\nX\n8\nX\n9\nX")
+    @user_input = StringIO.new("1\n1\n2\n3\n4\n5\n6\n7\n8\n9")
     ui = UI.new(@output, @user_input)
     flow = Flow.new(ui, @board)
     flow.start

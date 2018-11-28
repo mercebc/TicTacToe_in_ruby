@@ -20,9 +20,10 @@ class Flow
   end
 
   def play
-    @players[0].move @board
-    swap_players
+    position = @players[0].get_valid_position(@board)
+    @board.mark(position, @players[0].symbol)
     @ui.show_grid(@board)
+    swap_players
   end
 
   def swap_players

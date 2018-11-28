@@ -7,12 +7,6 @@ describe UI do
   let(:user_input) { StringIO.new }
   let(:output) { StringIO.new }
 
-  it 'can ask the user to introduce a symbol' do
-    user_input = StringIO.new("X")
-    ui = UI.new(output, user_input)
-    expect(ui.get_symbol).to eq("X")
-  end
-
   it 'can ask the user to introduce a position' do
     user_input = StringIO.new("1")
     ui = UI.new(output, user_input)

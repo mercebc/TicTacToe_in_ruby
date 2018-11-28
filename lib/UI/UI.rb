@@ -9,16 +9,11 @@ class UI
     @in = stdin
   end
 
-  def string_from_user message
-    @out.print message
-    @in.gets.chomp
-  end
-
-  def int_from_user
-    int = Integer @in.gets.chomp
+  def move_from_user
+    move = Integer @in.gets.chomp
   rescue ArgumentError
     show_error_message("Please insert a valid number ")
-    int_from_user
+    move_from_user
   end
 
   def draw_cell(board, position)
@@ -46,17 +41,13 @@ class UI
 
   def get_position
     @out.print "Please insert the position "
-    int_from_user - 1
-  end
-
-  def get_symbol
-    string_from_user("Please insert the symbol ")
+    move_from_user - 1
   end
 
   def show_error_message message
     @out.print message
   end
 
-  private :string_from_user, :int_from_user, :draw_cell
+  private :move_from_user, :draw_cell
 
 end

@@ -40,7 +40,7 @@ class UI
         @out.print DIVIDER if (row < size)
         @out.print PLUS if (col < size and row < size)
       end
-      @out.print "\n"
+      @out.print "\n"if (row < size)
     end
   end
 

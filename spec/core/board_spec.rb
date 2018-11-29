@@ -46,4 +46,18 @@ describe Board do
   it 'a cell that is empty is not invalid' do
     expect(board.invalid_cell(0)).to be false
   end
+
+  it 'there are three symbols in line' do
+    expect(board.three_in_line).to be true
+  end
+
+  it 'get all the columns' do
+    expect(board.get_columns(board.grid)).to eq("")
+  end
+
+  it 'get all the rows' do
+    board.mark(2,"D")
+    board.mark(4,"X")
+    expect(board.get_rows(board.grid)).to eq("")
+  end
 end

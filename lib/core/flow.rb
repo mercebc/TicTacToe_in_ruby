@@ -1,5 +1,6 @@
 require 'UI/UI'
 require 'core/board'
+require 'core/player'
 
 class Flow
   attr_reader :ui
@@ -8,6 +9,7 @@ class Flow
   def initialize (ui, board)
     @ui = ui
     @board = board
+    @players = [Player.new("X", @ui), Player.new("O", @ui)]
   end
 
   def start
@@ -17,17 +19,23 @@ class Flow
     end
   end
 
-  def get_valid_position
-    position = @ui.get_position
-    until @board.grid[position].is_empty? do
-    @ui.show_error_message("Please choose a different position where the cell is empty\n")
-    position = @ui.get_position
-    end
-    position
+  def play
+    position = current_player.get_valid_position(@board)
+    @board.mark(position, current_player.symbol)
+    @ui.show_grid(@board)
+    swap_players
   end
 
-  def play
-    @board.mark(get_valid_position, @ui.get_symbol)
-    @ui.show_grid(@board)
+  def swap_players
+    @players[0], @players[1] = opponent, current_player
   end
+
+  def current_player
+    @players.first
+  end
+
+  def opponent
+    @players.last
+  end
+
 end

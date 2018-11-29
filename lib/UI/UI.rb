@@ -9,16 +9,11 @@ class UI
     @in = stdin
   end
 
-  def string_from_user message
-    @out.print message
-    @in.gets.chomp
-  end
-
-  def int_from_user
-    int = Integer @in.gets.chomp
+  def move_from_user
+    move = Integer @in.gets.chomp
   rescue ArgumentError
     show_error_message("Please insert a valid number ")
-    int_from_user
+    move_from_user
   end
 
   def draw_cell(board, position)
@@ -32,31 +27,27 @@ class UI
     for row in 1..size do
       for col in 1..size do
         @out.print EMPTY + draw_cell(board, position) + EMPTY
-        @out.print PART if (col < size)
+        @out.print PART if col < size
         position += 1
       end
       @out.print "\n"
       for col in 1..size do
-        @out.print DIVIDER if (row < size)
+        @out.print DIVIDER if row < size
         @out.print PLUS if (col < size and row < size)
       end
-      @out.print "\n"
+      @out.print "\n" if row < size
     end
   end
 
   def get_position
     @out.print "Please insert the position "
-    int_from_user - 1
-  end
-
-  def get_symbol
-    string_from_user("Please insert the symbol ")
+    move_from_user - 1
   end
 
   def show_error_message message
     @out.print message
   end
 
-  private :string_from_user, :int_from_user, :draw_cell
+  private :move_from_user, :draw_cell
 
 end

@@ -15,4 +15,25 @@ describe Flow do
     flow.start
     expect(output.string).to include("Please choose a different position where the cell is empty\n")
   end
+
+  it 'current player is the first player in the array' do
+    ui = UI.new
+    flow = Flow.new(ui, board)
+    expect(flow.current_player.symbol).to eq("X")
+  end
+
+  it 'opponent is the last player in the array' do
+    ui = UI.new
+    flow = Flow.new(ui, board)
+    expect(flow.opponent.symbol).to eq("O")
+  end
+
+  it 'swap players in the array' do
+    ui = UI.new
+    flow = Flow.new(ui, board)
+    flow.swap_players
+    expect(flow.current_player.symbol).to eq("O")
+    expect(flow.opponent.symbol).to eq("X")
+  end
+
 end

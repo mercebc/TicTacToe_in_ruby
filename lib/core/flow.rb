@@ -27,11 +27,15 @@ class Flow
   end
 
   def swap_players
-    @players[0], @players[1] = @players[1], @players[0]
+    @players[0], @players[1] = opponent, current_player
   end
 
   def current_player
     @players.first
+  end
+
+  def opponent
+    @players.last
   end
 
 end

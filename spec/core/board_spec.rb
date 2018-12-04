@@ -6,6 +6,12 @@ describe Board do
 
   let(:board) { Board.new(3) }
 
+  def mark_board(marks)
+    for position in marks
+    board.mark(position, "X")
+    end
+  end
+
   it 'size is 3' do
     expect(board.size).to eq(3)
   end
@@ -47,17 +53,39 @@ describe Board do
     expect(board.invalid_cell(0)).to be false
   end
 
-  it 'there are three symbols in line' do
-    expect(board.three_in_line).to be true
+  it 'get the rows' do
+    mark_board([0, 2, 3, 7])
+    columns = board.get_rows
+    expect(columns[0][0].content).to eq("X")
+    expect(columns[0][2].content).to eq("X")
+    expect(columns[1][0].content).to eq("X")
+    expect(columns[2][1].content).to eq("X")
   end
 
-  it 'get all the columns' do
-    expect(board.get_columns(board.grid)).to eq("")
+  it 'get the columns' do
+    mark_board([0, 2, 3, 7])
+    rows = board.get_columns
+    expect(rows[0][0].content).to eq("X")
+    expect(rows[2][0].content).to eq("X")
+    expect(rows[0][1].content).to eq("X")
+    expect(rows[1][2].content).to eq("X")
   end
 
-  it 'get all the rows' do
-    board.mark(2,"D")
-    board.mark(4,"X")
-    expect(board.get_rows(board.grid)).to eq("")
+  it 'get the left diagonal' do
+    mark_board([0, 4, 8])
+    columns = board.get_columns
+    left_diagonal = board.get_left_diagonal(columns)
+    expect(left_diagonal[0].content).to eq("X")
+    expect(left_diagonal[1].content).to eq("X")
+    expect(left_diagonal[2].content).to eq("X")
+  end
+
+  it 'get the right diagonal' do
+    mark_board([2, 4, 6])
+    rows = board.get_rows
+    right_diagonal = board.get_right_diagonal(rows)
+    expect(right_diagonal[0].content).to eq("X")
+    expect(right_diagonal[1].content).to eq("X")
+    expect(right_diagonal[2].content).to eq("X")
   end
 end

@@ -12,7 +12,6 @@ class Board
     @size = board_size
     @capacity = size*size
     @grid = Array.new(capacity) {Cell.new()}
-    @columns = Array.new
     @lines = Array.new
     @rows = Array.new
   end
@@ -34,16 +33,30 @@ class Board
     !@grid[position].is_empty?
   end
 
-  def get_columns(grid)#columns is a global variable and it is changed every timme you run this function!!! and it shouldnt be like that
-    @columns << grid.slice!(0..@size -1)
-    grid.length > 0 ? get_columns(grid) : @columns
+  def get_rows
+    @grid.each_slice(@size).to_a
   end
 
-  def get_rows(grid)
-    get_columns(grid).transpose
+  def get_columns
+    get_rows.transpose
   end
 
-  def get_diagonal(grid)
+  def get_diagonals
+    diagonals = Array.new
+    diagonals << get_left_diagonal(get_columns)
+    diagonals << get_right_diagonal(get_rows)
+  end
+
+  def get_left_diagonal(columns)
+    (0..@size-1).collect { |i| columns[i][i] }
+  end
+
+  def get_right_diagonal(rows)
+    right_diagonal = Array.new
+    (@size-1).downto(0).each_with_index do |num, idx|
+      right_diagonal << rows[num][idx]
+    end
+    right_diagonal
   end
 
 end

@@ -2,8 +2,7 @@ require 'UI/UI'
 require 'core/board'
 
 class Player
-  attr_reader :symbol
-  attr_reader :ui
+  attr_reader :symbol, :ui
 
   def initialize(symbol, ui)
     @symbol = symbol

@@ -1,9 +1,7 @@
 require 'core/cell'
 
 class Board
-  attr_reader :grid
-  attr_reader :capacity
-  attr_reader :size
+  attr_reader :grid, :capacity, :size
 
   def initialize(board_size)
     @size = board_size
@@ -15,7 +13,7 @@ class Board
    @grid[position].content = symbol
   end
 
-  def is_full?
+  def tie?
     @grid.all? { |cell| !cell.is_empty? }
   end
 
@@ -27,25 +25,19 @@ class Board
     !@grid[position].is_empty?
   end
 
-  def has_a_winner?(players)
-    for player in players do
-      return true if is_a_winner?(player)
-    end
-    false
+  def win?(players)
+    players.any? { |player| is_a_winner?(player) }
   end
 
   def is_a_winner?(player)
     lines = get_all_lines
-    for line in lines do
-      return true if has_a_winning_line(line, player)
-    end
-    false
+    lines.any? { |line| has_a_winning_line(line, player) }
   end
 
   private
 
   def has_a_winning_line(line, player)
-    line.all? { |cell| cell.belongs_to(player) }
+    line.all? { |cell| cell.belongs_to?(player) }
   end
 
   def get_rows
@@ -56,11 +48,13 @@ class Board
     get_rows.transpose
   end
 
-  def get_left_diagonal(columns)
+  def get_left_diagonal
+    columns = get_columns
     (0..@size-1).collect { |i| columns[i][i] }
   end
 
-  def get_right_diagonal(rows)
+  def get_right_diagonal
+    rows = get_rows
     right_diagonal = Array.new
     (@size-1).downto(0).each_with_index do |num, idx|
       right_diagonal << rows[num][idx]
@@ -69,11 +63,7 @@ class Board
   end
 
   def get_all_lines
-    columns = get_columns
-    rows = get_rows
-    lines = columns + rows
-    lines << get_left_diagonal(columns)
-    lines << get_right_diagonal(rows)
+    get_columns + get_rows << get_left_diagonal << get_right_diagonal
   end
 
 end

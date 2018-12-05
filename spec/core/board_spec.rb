@@ -30,18 +30,18 @@ describe Board do
     expect(board.grid[3].content).to eq(nil)
   end
 
-  it 'is not full when some cells are empty' do
+  it 'is not a tie when some cells are empty' do
     board.mark(0, "X")
     board.mark(4, "X")
-    expect(board.is_full?).to eq(false)
+    expect(board.tie?).to eq(false)
   end
 
-  it 'is full when all cells have a value' do
+  it 'its a tie when all cells have a value' do
     capacity = board.capacity - 1
     for i in 0..capacity
       board.mark(i, "X")
     end
-    expect(board.is_full?).to eq(true)
+    expect(board.tie?).to eq(true)
   end
 
   it 'a cell that is not empty is invalid' do
@@ -57,14 +57,14 @@ describe Board do
     mark_board([2, 4, 6])
     user_ui = UI.new
     my_players = [Player.new("X", user_ui), Player.new("O", user_ui)]
-    expect(board.has_a_winner?(my_players)).to be true
+    expect(board.win?(my_players)).to be true
   end
 
   it 'doesnt have a winner' do
     mark_board([2, 4])
     user_ui = UI.new
     my_players = [Player.new("X", user_ui), Player.new("O", user_ui)]
-    expect(board.has_a_winner?(my_players)).to be false
+    expect(board.win?(my_players)).to be false
   end
 
   it 'player one is the winner' do

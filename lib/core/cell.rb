@@ -10,7 +10,7 @@ class Cell
     @content == EMPTY
   end
 
-  def belongs_to(player)
+  def belongs_to?(player)
     @content == player.symbol
   end
 end

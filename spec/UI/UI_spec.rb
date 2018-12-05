@@ -32,7 +32,7 @@ describe UI do
     expect(output.string).to eq("   |   |   \n---+---+---\n X |   |   \n---+---+---\n   |   |   \n")
   end
 
-  it 'announce a tie' do
+  it 'announces a tie' do
     ui = UI.new(output, StringIO.new)
     players = [Player.new("X", ui), Player.new("O", ui)]
     mark_board([0,2,4,7],"X")
@@ -41,7 +41,7 @@ describe UI do
     expect(output.string).to eq("It's a tie")
   end
 
-  it 'announce winner X' do
+  it 'announces winner X' do
     ui = UI.new(output, StringIO.new)
     players = [Player.new("X", ui), Player.new("O", ui)]
     mark_board([0,1,2],"X")
@@ -49,7 +49,7 @@ describe UI do
     expect(output.string).to eq("X has won!")
   end
 
-  it 'announce winner O' do
+  it 'announces winner O' do
     ui = UI.new(output, StringIO.new)
     players = [Player.new("X", ui), Player.new("O", ui)]
     mark_board([0,4,8],"O")

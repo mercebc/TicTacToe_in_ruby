@@ -3,8 +3,7 @@ require 'core/board'
 require 'core/player'
 
 class Flow
-  attr_reader :ui
-  attr_reader :board
+  attr_reader :ui, :board
 
   def initialize (ui, board)
     @ui = ui
@@ -28,7 +27,7 @@ class Flow
   end
 
   def game_over
-    @board.is_full? or @board.has_a_winner?(@players)
+    @board.tie? or @board.win?(@players)
   end
 
   def swap_players

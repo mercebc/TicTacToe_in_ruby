@@ -69,18 +69,11 @@ class Board
   end
 
   def get_all_lines
-    lines = Array.new
     columns = get_columns
     rows = get_rows
-    for line in columns do
-      lines << line
-    end
-    for line in rows do
-      lines << line
-    end
+    lines = columns + rows
     lines << get_left_diagonal(columns)
     lines << get_right_diagonal(rows)
-    lines
   end
 
 end

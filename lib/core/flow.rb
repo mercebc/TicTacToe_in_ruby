@@ -3,8 +3,7 @@ require 'core/board'
 require 'core/player'
 
 class Flow
-  attr_reader :ui
-  attr_reader :board
+  attr_reader :ui, :board
 
   def initialize (ui, board)
     @ui = ui
@@ -14,9 +13,10 @@ class Flow
 
   def start
     @ui.show_grid(@board)
-    while !@board.is_full?
+    until game_over do
       play
     end
+    @ui.announce_results(@board, @players)
   end
 
   def play
@@ -24,6 +24,10 @@ class Flow
     @board.mark(position, current_player.symbol)
     @ui.show_grid(@board)
     swap_players
+  end
+
+  def game_over
+    @board.tie? or @board.win?(@players)
   end
 
   def swap_players

@@ -3,6 +3,7 @@ class UI
   PART = "|"
   DIVIDER = "---"
   PLUS = "+"
+  attr_reader :out, :in
 
   def initialize(stdout = $stdout, stdin = $stdin)
     @out = stdout
@@ -46,6 +47,17 @@ class UI
 
   def show_error_message message
     @out.print message
+  end
+
+  def announce message
+    @out.print message
+  end
+
+  def announce_results(board, players)
+    announce("It's a tie") if board.tie?
+    players.each do |player|
+      announce(player.symbol + " has won!") if board.is_a_winner?(player)
+    end
   end
 
   private :move_from_user, :draw_cell

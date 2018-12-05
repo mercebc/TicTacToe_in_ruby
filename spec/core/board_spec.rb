@@ -7,7 +7,7 @@ describe Board do
   let(:board) { Board.new(3) }
 
   def mark_board(marks)
-    for position in marks
+    marks.each do |position|
       board.mark(position, "X")
     end
   end
@@ -21,19 +21,19 @@ describe Board do
   end
 
   it 'can get a content of a cell' do
-    expect(board.get_content(1)).to eq(nil)
+    expect(board.get_content(1)).to be(nil)
   end
 
   it 'can mark itself with a symbol' do
     board.mark(1, "X")
     expect(board.grid[1].content).to eq("X")
-    expect(board.grid[3].content).to eq(nil)
+    expect(board.grid[3].content).to be(nil)
   end
 
   it 'is not a tie when some cells are empty' do
     board.mark(0, "X")
     board.mark(4, "X")
-    expect(board.tie?).to eq(false)
+    expect(board.tie?).to be(false)
   end
 
   it 'its a tie when all cells have a value' do
@@ -41,44 +41,44 @@ describe Board do
     for i in 0..capacity
       board.mark(i, "X")
     end
-    expect(board.tie?).to eq(true)
+    expect(board.tie?).to be(true)
   end
 
   it 'a cell that is not empty is invalid' do
     board.mark(0, "X")
-    expect(board.invalid_cell(0)).to be true
+    expect(board.invalid_cell(0)).to be(true)
   end
 
   it 'a cell that is empty is not invalid' do
-    expect(board.invalid_cell(0)).to be false
+    expect(board.invalid_cell(0)).to be(false)
   end
 
   it 'has a winner' do
     mark_board([2, 4, 6])
     user_ui = UI.new
     my_players = [Player.new("X", user_ui), Player.new("O", user_ui)]
-    expect(board.win?(my_players)).to be true
+    expect(board.win?(my_players)).to be(true)
   end
 
   it 'doesnt have a winner' do
     mark_board([2, 4])
     user_ui = UI.new
     my_players = [Player.new("X", user_ui), Player.new("O", user_ui)]
-    expect(board.win?(my_players)).to be false
+    expect(board.win?(my_players)).to be(false)
   end
 
   it 'player one is the winner' do
     mark_board([2, 4, 6])
     user_ui = UI.new
     player_one = Player.new("X", user_ui)
-    expect(board.is_a_winner?(player_one)).to be true
+    expect(board.is_a_winner?(player_one)).to be(true)
   end
 
   it 'player two is not the winner' do
     mark_board([2, 4, 6])
     user_ui = UI.new
     player_two = Player.new("O", user_ui)
-    expect(board.is_a_winner?(player_two)).to be false
+    expect(board.is_a_winner?(player_two)).to be(false)
   end
 
 end

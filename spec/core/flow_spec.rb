@@ -10,7 +10,7 @@ describe Flow do
     let(:flow) { Flow.new(ui, board) }
 
     def mark_board(marks)
-      for position in marks
+      marks.each do |position|
         board.mark(position, "X")
       end
     end
@@ -31,12 +31,12 @@ describe Flow do
 
   it 'game is over' do
     mark_board([0, 1, 2])
-    expect(flow.game_over).to be true
+    expect(flow.game_over).to be(true)
   end
 
   it 'game is not over' do
     mark_board([0, 2, 8])
-    expect(flow.game_over).to be false
+    expect(flow.game_over).to be(false)
   end
 
 end

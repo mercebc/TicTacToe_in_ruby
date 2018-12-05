@@ -8,7 +8,7 @@ describe UI do
   let(:board) { Board.new(3) }
 
   def mark_board(marks, symbol)
-    for position in marks
+    marks.each do |position|
       board.mark(position, symbol)
     end
   end

@@ -8,7 +8,7 @@ describe Board do
 
   def mark_board(marks)
     for position in marks
-    board.mark(position, "X")
+      board.mark(position, "X")
     end
   end
 
@@ -53,39 +53,32 @@ describe Board do
     expect(board.invalid_cell(0)).to be false
   end
 
-  it 'get the rows' do
-    mark_board([0, 2, 3, 7])
-    columns = board.get_rows
-    expect(columns[0][0].content).to eq("X")
-    expect(columns[0][2].content).to eq("X")
-    expect(columns[1][0].content).to eq("X")
-    expect(columns[2][1].content).to eq("X")
-  end
-
-  it 'get the columns' do
-    mark_board([0, 2, 3, 7])
-    rows = board.get_columns
-    expect(rows[0][0].content).to eq("X")
-    expect(rows[2][0].content).to eq("X")
-    expect(rows[0][1].content).to eq("X")
-    expect(rows[1][2].content).to eq("X")
-  end
-
-  it 'get the left diagonal' do
-    mark_board([0, 4, 8])
-    columns = board.get_columns
-    left_diagonal = board.get_left_diagonal(columns)
-    expect(left_diagonal[0].content).to eq("X")
-    expect(left_diagonal[1].content).to eq("X")
-    expect(left_diagonal[2].content).to eq("X")
-  end
-
-  it 'get the right diagonal' do
+  it 'has a winner' do
     mark_board([2, 4, 6])
-    rows = board.get_rows
-    right_diagonal = board.get_right_diagonal(rows)
-    expect(right_diagonal[0].content).to eq("X")
-    expect(right_diagonal[1].content).to eq("X")
-    expect(right_diagonal[2].content).to eq("X")
+    user_ui = UI.new
+    my_players = [Player.new("X", user_ui), Player.new("O", user_ui)]
+    expect(board.has_a_winner?(my_players)).to be true
   end
+
+  it 'doesnt have a winner' do
+    mark_board([2, 4])
+    user_ui = UI.new
+    my_players = [Player.new("X", user_ui), Player.new("O", user_ui)]
+    expect(board.has_a_winner?(my_players)).to be false
+  end
+
+  it 'player one is the winner' do
+    mark_board([2, 4, 6])
+    user_ui = UI.new
+    player_one = Player.new("X", user_ui)
+    expect(board.is_a_winner?(player_one)).to be true
+  end
+
+  it 'player two is not the winner' do
+    mark_board([2, 4, 6])
+    user_ui = UI.new
+    player_two = Player.new("O", user_ui)
+    expect(board.is_a_winner?(player_two)).to be false
+  end
+
 end

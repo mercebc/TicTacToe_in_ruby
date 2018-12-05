@@ -48,6 +48,17 @@ class UI
     @out.print message
   end
 
+  def announce message
+    @out.print message
+  end
+
+  def announce_results(board, players)
+    announce("It's a tie") if board.is_full?
+    for player in players do
+      announce(player.symbol + " has won!") if board.is_a_winner?(player)
+    end
+  end
+
   private :move_from_user, :draw_cell
 
 end

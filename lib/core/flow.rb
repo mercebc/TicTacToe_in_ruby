@@ -14,9 +14,10 @@ class Flow
 
   def start
     @ui.show_grid(@board)
-    while !@board.is_full?
+    until game_over do
       play
     end
+    @ui.announce_results(@board, @players)
   end
 
   def play
@@ -24,6 +25,10 @@ class Flow
     @board.mark(position, current_player.symbol)
     @ui.show_grid(@board)
     swap_players
+  end
+
+  def game_over
+    @board.is_full? or @board.has_a_winner?(@players)
   end
 
   def swap_players

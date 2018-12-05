@@ -4,21 +4,15 @@ class Board
   attr_reader :grid
   attr_reader :capacity
   attr_reader :size
-  attr_accessor :columns
-  attr_accessor :lines
-  attr_accessor :rows
 
   def initialize(board_size)
     @size = board_size
     @capacity = size*size
     @grid = Array.new(capacity) {Cell.new()}
-    @lines = Array.new
-    @rows = Array.new
   end
 
   def mark(position, symbol)
    @grid[position].content = symbol
-   @grid
   end
 
   def is_full?
@@ -33,18 +27,33 @@ class Board
     !@grid[position].is_empty?
   end
 
+  def has_a_winner?(players)
+    for player in players do
+      return true if is_a_winner?(player)
+    end
+    false
+  end
+
+  def is_a_winner?(player)
+    lines = get_all_lines
+    for line in lines do
+      return true if has_a_winning_line(line, player)
+    end
+    false
+  end
+
+  private
+
+  def has_a_winning_line(line, player)
+    line.all? { |cell| cell.belongs_to(player) }
+  end
+
   def get_rows
     @grid.each_slice(@size).to_a
   end
 
   def get_columns
     get_rows.transpose
-  end
-
-  def get_diagonals
-    diagonals = Array.new
-    diagonals << get_left_diagonal(get_columns)
-    diagonals << get_right_diagonal(get_rows)
   end
 
   def get_left_diagonal(columns)
@@ -57,6 +66,21 @@ class Board
       right_diagonal << rows[num][idx]
     end
     right_diagonal
+  end
+
+  def get_all_lines
+    lines = Array.new
+    columns = get_columns
+    rows = get_rows
+    for line in columns do
+      lines << line
+    end
+    for line in rows do
+      lines << line
+    end
+    lines << get_left_diagonal(columns)
+    lines << get_right_diagonal(rows)
+    lines
   end
 
 end

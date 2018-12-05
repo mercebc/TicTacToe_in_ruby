@@ -9,4 +9,8 @@ class Cell
   def is_empty?
     @content == EMPTY
   end
+
+  def belongs_to(player)
+    @content == player.symbol
+  end
 end

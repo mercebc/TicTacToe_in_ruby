@@ -5,10 +5,11 @@ $: << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'core/menu'
 
 class Game
-  attr_reader :menu
+  attr_reader :ui, :menu
 
   def initialize
-    @menu = Menu.new
+    @ui = UI.new
+    @menu = Menu.new(@ui)
     @menu.setup
   end
 end

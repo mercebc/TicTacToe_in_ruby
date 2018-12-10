@@ -81,13 +81,13 @@ describe Board do
     mark_board([2, 4, 6])
     user_ui = UI.new
     player_one = Human.new("X", user_ui)
-    expect(board.is_a_winner?(player_one)).to be(true)
+    expect(board.winner?(player_one)).to be(true)
   end
 
   it 'player two is not the winner' do
     mark_board([2, 4, 6])
     player_two = Easy_computer.new("O")
-    expect(board.is_a_winner?(player_two)).to be(false)
+    expect(board.winner?(player_two)).to be(false)
   end
 
 end

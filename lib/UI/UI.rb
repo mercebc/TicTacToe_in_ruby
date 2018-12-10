@@ -64,11 +64,10 @@ class UI
 
   def announce_results(board, players)
     if board.win?(players)
-    players.each do |player|
-      announce(player.symbol + " has won") if board.is_a_winner?(player)
-    end
+      winner = players.select { |player| board.winner?(player) }.first
+      announce(winner.symbol + " has won")
     else
-    announce("It's a tie")
+      announce("It's a tie")
     end
   end
 

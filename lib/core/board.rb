@@ -38,17 +38,17 @@ class Board
   end
 
   def win?(players)
-    players.any? { |player| is_a_winner?(player) }
+    players.any? { |player| winner?(player) }
   end
 
-  def is_a_winner?(player)
+  def winner?(player)
     lines = get_all_lines
-    lines.any? { |line| has_a_winning_line(line, player) }
+    lines.any? { |line| winning_line?(line, player) }
   end
 
   private
 
-  def has_a_winning_line(line, player)
+  def winning_line?(line, player)
     line.all? { |cell| cell.belongs_to?(player) }
   end
 

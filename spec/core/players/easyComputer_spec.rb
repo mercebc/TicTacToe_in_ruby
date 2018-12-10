@@ -1,10 +1,10 @@
 require 'rspec'
-require 'core/players/easy_computer'
+require 'core/players/easyComputer'
 require 'core/board'
 
-describe Easy_computer do
+describe EasyComputer do
 
-  let(:random_computer) { Easy_computer.new("X") }
+  let(:random_computer) { EasyComputer.new("X") }
   let(:board) { Board.new(3) }
 
   it 'gets a random position' do

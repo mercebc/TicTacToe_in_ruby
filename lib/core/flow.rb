@@ -1,8 +1,8 @@
 require 'UI/UI'
 require 'core/board'
 require 'core/players/human'
-require 'core/players/easy_computer'
-require 'core/players/player_factory'
+require 'core/players/easyComputer'
+require 'core/players/playerFactory'
 
 class Flow
   attr_reader :ui, :board, :players

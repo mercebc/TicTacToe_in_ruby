@@ -1,6 +1,6 @@
 require 'core/board'
 
-class Easy_computer
+class EasyComputer
   attr_accessor :symbol
 
   def initialize(symbol)

@@ -1,7 +1,7 @@
 require 'UI/UI'
-require 'core/players/player_factory'
+require 'core/players/playerFactory'
 require 'core/players/human'
-require 'core/players/easy_computer'
+require 'core/players/easyComputer'
 require 'core/flow'
 
 class Menu
@@ -23,7 +23,7 @@ class Menu
   end
 
   def create_players(mode)
-    new_player = Player_factory.new
+    new_player = PlayerFactory.new
     players = Array.new
     case mode
       when MODE[:HUMAN_VS_HUMAN]

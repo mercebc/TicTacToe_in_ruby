@@ -18,7 +18,7 @@ describe Menu do
     menu = Menu.new(ui)
     players = menu.create_players(mode)
     expect(players[0]).to be_a(Human)
-    expect(players[1]).to be_a(Easy_computer)
+    expect(players[1]).to be_a(EasyComputer)
   end
 
 end

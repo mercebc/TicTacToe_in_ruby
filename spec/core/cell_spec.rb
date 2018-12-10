@@ -26,7 +26,7 @@ describe Cell do
   end
 
   it 'doesnt belong to a player' do
-    my_player = Easy_computer.new("X")
+    my_player = EasyComputer.new("X")
     my_cell.content = "O"
     expect(my_cell.belongs_to?(my_player)).to be(false)
   end

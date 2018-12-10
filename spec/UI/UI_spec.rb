@@ -40,7 +40,7 @@ describe UI do
 
   it 'announces a tie' do
     ui = UI.new(output, StringIO.new)
-    players = [Human.new("X", ui), Easy_computer.new("O")]
+    players = [Human.new("X", ui), EasyComputer.new("O")]
     mark_board([0,2,4,7],"X")
     mark_board([1,3,5,6,8],"O")
     ui.announce_results(board, players)
@@ -57,7 +57,7 @@ describe UI do
 
   it 'announces winner O' do
     ui = UI.new(output, StringIO.new)
-    players = [Human.new("X", ui), Easy_computer.new("O")]
+    players = [Human.new("X", ui), EasyComputer.new("O")]
     mark_board([0,4,8],"O")
     ui.announce_results(board, players)
     expect(output.string).to eq("O has won")

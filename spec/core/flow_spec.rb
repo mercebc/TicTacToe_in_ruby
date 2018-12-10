@@ -6,7 +6,7 @@ require 'UI/UI'
 describe Flow do
 
     let(:ui) { UI.new }
-    let(:players) {[Human.new("X", ui), Easy_computer.new("O")]}
+    let(:players) {[Human.new("X", ui), EasyComputer.new("O")]}
     let(:flow) { Flow.new(ui, players, 3) }
 
     def mark_board(marks)

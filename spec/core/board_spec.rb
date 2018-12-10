@@ -73,7 +73,7 @@ describe Board do
   it 'doesnt have a winner' do
     mark_board([2, 4])
     user_ui = UI.new
-    my_players = [Easy_computer.new("X"), Human.new("O", user_ui)]
+    my_players = [EasyComputer.new("X"), Human.new("O", user_ui)]
     expect(board.win?(my_players)).to be(false)
   end
 
@@ -86,7 +86,7 @@ describe Board do
 
   it 'player two is not the winner' do
     mark_board([2, 4, 6])
-    player_two = Easy_computer.new("O")
+    player_two = EasyComputer.new("O")
     expect(board.winner?(player_two)).to be(false)
   end
 

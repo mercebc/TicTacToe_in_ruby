@@ -20,14 +20,13 @@ describe Cell do
 
   it 'belongs to a player' do
     user_ui = UI.new
-    my_player = Player.new("X", user_ui)
+    my_player = Human.new("X", user_ui)
     my_cell.content = "X"
     expect(my_cell.belongs_to?(my_player)).to be(true)
   end
 
   it 'doesnt belong to a player' do
-    user_ui = UI.new
-    my_player = Player.new("X", user_ui)
+    my_player = Easy_computer.new("X")
     my_cell.content = "O"
     expect(my_cell.belongs_to?(my_player)).to be(false)
   end

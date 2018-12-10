@@ -25,6 +25,18 @@ class Board
     !@grid[position].is_empty?
   end
 
+  def all_empty_cells
+    @grid.find_all { |cell| cell.is_empty? }
+  end
+
+  def available_positions
+    available_positions = Array.new
+    all_empty_cells.each do |empty_cell|
+      available_positions << @grid.index(empty_cell)
+    end
+    available_positions
+  end
+
   def win?(players)
     players.any? { |player| is_a_winner?(player) }
   end

@@ -17,6 +17,10 @@ class UI
     move_from_user
   end
 
+  def mode_from_user
+    @in.gets.chomp
+  end
+
   def draw_cell(board, position)
     board.get_content(position).nil? ? EMPTY : board.get_content(position)
   end
@@ -45,6 +49,11 @@ class UI
     move_from_user - 1
   end
 
+  def get_game_mode
+    @out.print "Please, introduce 'h' for human-human or 'e' for easy computer "
+    mode_from_user
+  end
+
   def show_error_message message
     @out.print message
   end
@@ -54,9 +63,12 @@ class UI
   end
 
   def announce_results(board, players)
-    announce("It's a tie") if board.tie?
+    if board.win?(players)
     players.each do |player|
-      announce(player.symbol + " has won!") if board.is_a_winner?(player)
+      announce(player.symbol + " has won") if board.is_a_winner?(player)
+    end
+    else
+    announce("It's a tie")
     end
   end
 

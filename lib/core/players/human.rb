@@ -1,7 +1,7 @@
 require 'UI/UI'
 require 'core/board'
 
-class Player
+class Human
   attr_reader :symbol, :ui
 
   def initialize(symbol, ui)
@@ -9,7 +9,7 @@ class Player
     @ui = ui
   end
 
-  def get_valid_position(board)
+  def get_position(board)
     validate_position(@ui.get_position, board)
   end
 
@@ -19,7 +19,7 @@ class Player
 
   def get_validated_position(board)
     @ui.show_error_message("Please choose a different position where the cell is empty\n")
-    get_valid_position(board)
+    get_position(board)
   end
 
   private :validate_position, :get_validated_position

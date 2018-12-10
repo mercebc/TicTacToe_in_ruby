@@ -1,26 +1,28 @@
 require 'UI/UI'
 require 'core/board'
-require 'core/player'
+require 'core/players/human'
+require 'core/players/easy_computer'
+require 'core/players/player_factory'
 
 class Flow
-  attr_reader :ui, :board
+  attr_reader :ui, :board, :players
 
-  def initialize (ui, board)
+  def initialize (ui, players, board_size)
     @ui = ui
-    @board = board
-    @players = [Player.new("X", @ui), Player.new("O", @ui)]
+    @board = Board.new(board_size)
+    @players = players
   end
 
   def start
     @ui.show_grid(@board)
     until game_over do
-      play
+      play_turn
     end
     @ui.announce_results(@board, @players)
   end
 
-  def play
-    position = current_player.get_valid_position(@board)
+  def play_turn
+    position = current_player.get_position(@board)
     @board.mark(position, current_player.symbol)
     @ui.show_grid(@board)
     swap_players

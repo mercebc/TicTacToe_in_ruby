@@ -1,5 +1,6 @@
 require 'rspec'
 require 'core/Menu'
+require 'UI/UI'
 
 describe Menu do
 

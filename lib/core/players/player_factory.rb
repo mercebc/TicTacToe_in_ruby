@@ -1,5 +1,5 @@
 require 'core/players/human'
-require 'core/players/easyComputer'
+require 'core/players/easy_computer'
 
 class PlayerFactory
   PLAYERS = {

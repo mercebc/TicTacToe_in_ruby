@@ -1,5 +1,5 @@
 require 'rspec'
-require 'core/players/easyComputer'
+require 'core/players/easy_computer'
 require 'core/board'
 
 describe EasyComputer do

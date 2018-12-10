@@ -1,7 +1,7 @@
 require 'UI/UI'
-require 'core/players/playerFactory'
+require 'core/players/player_factory'
 require 'core/players/human'
-require 'core/players/easyComputer'
+require 'core/players/easy_computer'
 require 'core/flow'
 
 class Menu

@@ -6,12 +6,12 @@ require 'UI/UI'
 describe Flow do
 
     let(:ui) { UI.new }
-    let(:board) { Board.new(3) }
-    let(:flow) { Flow.new(ui, board) }
+    let(:players) {[Human.new("X", ui), EasyComputer.new("O")]}
+    let(:flow) { Flow.new(ui, players, 3) }
 
     def mark_board(marks)
       marks.each do |position|
-        board.mark(position, "X")
+        flow.board.mark(position, "X")
       end
     end
 

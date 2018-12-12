@@ -5,12 +5,10 @@ require 'core/players/easy_computer'
 require 'core/flow'
 
 class Menu
-  attr_reader :ui, :mode, :players, :flow
   MODE = {
     :HUMAN_VS_HUMAN  => 'h',
     :HUMAN_VS_EASY_COMPUTER  => 'e'
   }
-  private_constant :MODE
 
   def initialize(ui)
     @ui = ui

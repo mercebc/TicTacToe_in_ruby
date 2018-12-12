@@ -10,19 +10,19 @@ class UI
     @in = stdin
   end
 
-  def move_from_user
+  def get_move
     move = Integer @in.gets.chomp
   rescue ArgumentError
     show_error_message("Please insert a valid number ")
-    move_from_user
+    get_move
   end
 
-  def mode_from_user
+  def get_mode
     @in.gets.chomp
   end
 
   def draw_cell(board, position)
-    board.get_content(position).nil? ? EMPTY : board.get_content(position)
+    board.get_content(position).nil? ? (position + 1).to_s : board.get_content(position)
   end
 
   def show_grid board
@@ -46,31 +46,27 @@ class UI
 
   def get_position
     @out.print "Please insert the position "
-    move_from_user - 1
+    get_move - 1
   end
 
   def get_game_mode
     @out.print "Please, introduce 'h' for human-human or 'e' for easy computer "
-    mode_from_user
+    get_mode
   end
 
-  def show_error_message message
-    @out.print message
-  end
-
-  def announce message
+  def print_message message
     @out.print message
   end
 
   def announce_results(board, players)
     if board.win?(players)
       winner = players.select { |player| board.winner?(player) }.first
-      announce(winner.symbol + " has won")
+      print_message(winner.symbol + " has won")
     else
-      announce("It's a tie")
+      print_message("It's a tie")
     end
   end
 
-  private :move_from_user, :draw_cell
+  private :get_move, :get_mode, :draw_cell
 
 end

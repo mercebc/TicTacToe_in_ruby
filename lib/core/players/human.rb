@@ -18,7 +18,7 @@ class Human
   end
 
   def get_validated_position(board)
-    @ui.show_error_message("Please choose a different position where the cell is empty\n")
+    @ui.print_message("Please choose a different position where the cell is empty\n")
     get_position(board)
   end
 

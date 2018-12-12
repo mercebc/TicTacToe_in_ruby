@@ -27,7 +27,7 @@ describe UI do
 
   it 'can display an error message' do
     ui = UI.new(output, StringIO.new)
-    ui.show_error_message("Error message")
+    ui.print_message("Error message")
     expect(output.string).to eq("Error message")
   end
 
@@ -35,7 +35,13 @@ describe UI do
     ui = UI.new(output, StringIO.new)
     board.mark(3,"X")
     ui.show_grid(board)
-    expect(output.string).to eq("   |   |   \n---+---+---\n X |   |   \n---+---+---\n   |   |   \n")
+    expect(output.string).to eq(" 1 | 2 | 3 \n---+---+---\n X | 5 | 6 \n---+---+---\n 7 | 8 | 9 \n")
+  end
+
+  it 'show position number in the grid' do
+    ui = UI.new(output, StringIO.new)
+    ui.show_grid(board)
+    expect(output.string).to eq(" 1 | 2 | 3 \n---+---+---\n 4 | 5 | 6 \n---+---+---\n 7 | 8 | 9 \n")
   end
 
   it 'announces a tie' do

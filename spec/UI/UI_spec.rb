@@ -16,13 +16,13 @@ describe UI do
   it 'can ask the user to introduce a position' do
     user_input = StringIO.new("1")
     ui = UI.new(output, user_input)
-    expect(ui.get_position).to eq(0)
+    expect(ui.get_position(board)).to eq(0)
   end
 
   it 'can ask the user to introduce a mode' do
     user_input = StringIO.new("h")
     ui = UI.new(output, user_input)
-    expect(ui.get_game_mode).to eq("h")
+    expect(ui.get_mode).to eq("h")
   end
 
   it 'can display an error message' do

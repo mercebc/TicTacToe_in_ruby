@@ -15,7 +15,7 @@ class Menu
   end
 
   def setup
-    mode = @ui.get_game_mode
+    mode = @ui.get_mode
     @players = create_players(mode)
     play
   end

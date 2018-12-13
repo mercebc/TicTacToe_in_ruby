@@ -14,15 +14,22 @@ class Flow
     @ui.show_grid(@board)
     until game_over do
       play_turn
+      @ui.clear_screen
+      display_turn
+      swap_players
     end
     @ui.announce_results(@board, @players)
   end
 
   def play_turn
+    @ui.print_message("Player " + current_player.symbol + ", please insert a position: ")
     position = current_player.get_position(@board)
     @board.mark(position, current_player.symbol)
+  end
+
+  def display_turn
+    @ui.print_message("Player " + current_player.symbol + "'s turn:\n")
     @ui.show_grid(@board)
-    swap_players
   end
 
   def game_over

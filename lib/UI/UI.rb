@@ -16,27 +16,22 @@ class UI
   end
 
   def get_position(board)
-    position = @validate.position(@in.gets.chomp)
-    until position != false
-      @out.print("Please insert a valid number \n")
+    position = @in.gets.chomp
+    unless @validate.move(position, board)
+      @out.print("Please insert a valid position: ")
       get_position(board)
     end
-    position-=1
-    until @validate.move(position, board)
-      @out.print("Please insert a valid position \n")
-      get_position(board)
-    end
-    position
+    position.to_i-1
   end
 
   def get_mode
-    @out.print "Please, introduce 'h' for human-human or 'e' for easy computer"
+    @out.print "Please, introduce 'h' for human-human or 'e' for easy computer\n"
     option = @in.gets.chomp
-    until @validate.mode(option)
-      @out.print("Please insert a valid option /n")
+    unless @validate.mode(option)
+      @out.print("The option is not valid. ")
       get_mode
     end
-    option
+    option.downcase
   end
 
   def draw_cell(board, position)

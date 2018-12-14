@@ -21,24 +21,16 @@ describe Validate do
   end
 
   it 'position is valid' do
-    expect(validate.move(2, board)).to eq(true)
+    expect(validate.move("2", board)).to eq(true)
   end
 
   it 'position is not between the capacity of the board' do
-    expect(validate.move(23, board)).to eq(false)
+    expect(validate.move("23", board)).to eq(false)
   end
 
   it 'position is already been chosen' do
     board.mark(3,"X")
-    expect(validate.move(3, board)).to eq(false)
-  end
-
-  it 'position is not a valid number' do
-    expect(validate.position("p")).to eq(false)
-  end
-
-  it 'position is valid' do
-    expect(validate.position("2")).to eq(2)
+    expect(validate.move("4", board)).to eq(false)
   end
 
 end

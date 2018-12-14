@@ -4,20 +4,16 @@ require 'core/board'
 class Validate
 
   def mode(option)
-    return true if option =~ /^[e|E|h|H]$/
-    false
-  end
-
-  def position(position)
-   Integer position
-   rescue ArgumentError
-     return false
+    regex = Regexp.new("^([e|E|h|H])$")
+    return false if regex.match(option).nil?
+    true
   end
 
   def move(position, board)
-   return false if !position.between?(0, board.capacity-1)
-   return false if board.invalid_cell(position)
-   true
+    regex = Regexp.new("^([1-9])$")
+    return false if regex.match(position).nil?
+    return false if board.invalid_cell(position.to_i-1)
+    true
   end
 
 end

@@ -1,5 +1,8 @@
 require 'rspec'
 require 'core/cell'
+require 'UI/UI'
+require 'core/players/easy_computer'
+require 'core/players/human'
 
 describe Cell do
 

@@ -22,7 +22,7 @@ describe UI do
   it 'shows error if user introduces a position higher than capacity' do
     user_input = StringIO.new("10\n3")
     ui = UI.new(output, user_input)
-    ui.get_position(board)
+    expect(ui.get_position(board)).to eq(2)
     expect(output.string).to eq("Please insert a valid position: ")
   end
 
@@ -30,14 +30,14 @@ describe UI do
     user_input = StringIO.new("6\n3")
     ui = UI.new(output, user_input)
     board.mark(5, "X")
-    ui.get_position(board)
+    expect(ui.get_position(board)).to eq(2)
     expect(output.string).to eq("Please insert a valid position: ")
   end
 
   it 'shows error if user doesnt introduce a valid number' do
     user_input = StringIO.new("s\n3")
     ui = UI.new(output, user_input)
-    ui.get_position(board)
+    expect(ui.get_position(board)).to eq(2)
     expect(output.string).to eq("Please insert a valid position: ")
   end
 
@@ -50,7 +50,7 @@ describe UI do
   it 'shows error if user doesnt introduce a valid mode' do
     user_input = StringIO.new("j\nH")
     ui = UI.new(output, user_input)
-    ui.get_mode
+    expect(ui.get_mode).to eq("h")
     expect(output.string).to include("The option is not valid. ")
   end
 

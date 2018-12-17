@@ -20,6 +20,10 @@ describe Validate do
     expect(validate.mode("H")).to eq(true)
   end
 
+  it 'game mode option "H" is valid' do
+    expect(validate.mode("H")).to eq(true)
+  end
+
   it 'position is valid' do
     expect(validate.move("2", board)).to eq(true)
   end

@@ -20,8 +20,9 @@ class UI
     unless @validate.move(position, board)
       @out.print("Please insert a valid position: ")
       get_position(board)
+    else
+      position.to_i-1
     end
-    position.to_i-1
   end
 
   def get_mode
@@ -30,8 +31,9 @@ class UI
     unless @validate.mode(option)
       @out.print("The option is not valid. ")
       get_mode
+    else
+      option.downcase
     end
-    option.downcase
   end
 
   def draw_cell(board, position)

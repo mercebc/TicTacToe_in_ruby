@@ -1,4 +1,4 @@
-require 'UI/Validate'
+require 'UI/Validator'
 require 'core/players/Human'
 require 'core/players/Easy_computer'
 
@@ -12,12 +12,12 @@ class UI
   def initialize(stdout = $stdout, stdin = $stdin)
     @out = stdout
     @in = stdin
-    @validate = Validate.new
+    @validator = Validator.new
   end
 
   def get_position(board)
     position = @in.gets.chomp
-    unless @validate.move(position, board)
+    unless @validator.valid_move?(position, board)
       @out.print("Please insert a valid position: ")
       get_position(board)
     else
@@ -28,7 +28,7 @@ class UI
   def get_mode
     @out.print "Please, introduce 'h' for human-human or 'e' for easy computer\n"
     option = @in.gets.chomp
-    unless @validate.mode(option)
+    unless @validator.valid_mode?(option)
       @out.print("The option is not valid. ")
       get_mode
     else

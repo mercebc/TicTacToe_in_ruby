@@ -11,6 +11,8 @@ class Game
     @ui = UI.new
     @menu = Menu.new(@ui)
     @menu.setup
+    rescue Interrupt => e
+      puts "Thanks for playing! see you next time!"
   end
 end
 

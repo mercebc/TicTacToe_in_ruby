@@ -1,15 +1,14 @@
 require 'UI/UI'
 require 'core/board'
 
-class Validate
+class Validator
 
-  def mode(option)
+  def valid_mode?(option)
     regex = Regexp.new("^([e|E|h|H])$")
-    return false if regex.match(option).nil?
-    true
+    regex.match(option).nil? ? false : true
   end
 
-  def move(position, board)
+  def valid_move?(position, board)
     regex = Regexp.new("^([1-9])$")
     return false if regex.match(position).nil?
     return false if board.invalid_cell(position.to_i-1)

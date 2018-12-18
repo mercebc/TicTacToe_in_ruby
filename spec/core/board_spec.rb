@@ -1,6 +1,8 @@
 require 'rspec'
 require 'core/board'
 require 'core/cell'
+require 'core/players/easy_computer'
+require 'UI/UI'
 
 describe Board do
 
@@ -90,4 +92,11 @@ describe Board do
     expect(board.winner?(player_two)).to be(false)
   end
 
+  it 'position in range' do
+    expect(board.outside_range?(0)).to eq(false)
+  end
+
+  it 'position not in range' do 
+    expect(board.outside_range?(9)).to eq(true)
+  end
 end

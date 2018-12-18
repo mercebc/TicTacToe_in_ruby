@@ -15,12 +15,4 @@ describe Human do
     expect(player.get_position(board)).to eq(3)
   end
 
-  it 'cant play in a cell that is already marked' do
-    board.mark(2, "O")
-    player_input = StringIO.new("3\n4")
-    player_ui = UI.new(output, player_input)
-    player = Human.new("X", player_ui)
-    player.get_position(board)
-    expect(output.string).to include("Please choose a different position where the cell is empty\n")
-  end
 end

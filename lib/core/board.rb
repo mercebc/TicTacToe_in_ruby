@@ -46,6 +46,10 @@ class Board
     lines.any? { |line| winning_line?(line, player) }
   end
 
+  def outside_range?(position)
+    !position.between?(0, capacity-1)
+  end
+
   private
 
   def winning_line?(line, player)

@@ -16,13 +16,42 @@ describe UI do
   it 'can ask the user to introduce a position' do
     user_input = StringIO.new("1")
     ui = UI.new(output, user_input)
-    expect(ui.get_position).to eq(0)
+    expect(ui.get_position(board)).to eq(0)
+  end
+
+  it 'shows error if user introduces a position higher than capacity' do
+    user_input = StringIO.new("10\n3")
+    ui = UI.new(output, user_input)
+    expect(ui.get_position(board)).to eq(2)
+    expect(output.string).to eq("Please insert a valid position: ")
+  end
+
+  it 'shows error if user introduces a position thats already taken' do
+    user_input = StringIO.new("6\n3")
+    ui = UI.new(output, user_input)
+    board.mark(5, "X")
+    expect(ui.get_position(board)).to eq(2)
+    expect(output.string).to eq("Please insert a valid position: ")
+  end
+
+  it 'shows error if user doesnt introduce a valid number' do
+    user_input = StringIO.new("s\n3")
+    ui = UI.new(output, user_input)
+    expect(ui.get_position(board)).to eq(2)
+    expect(output.string).to eq("Please insert a valid position: ")
   end
 
   it 'can ask the user to introduce a mode' do
     user_input = StringIO.new("h")
     ui = UI.new(output, user_input)
-    expect(ui.get_game_mode).to eq("h")
+    expect(ui.get_mode).to eq("h")
+  end
+
+  it 'shows error if user doesnt introduce a valid mode' do
+    user_input = StringIO.new("j\nH")
+    ui = UI.new(output, user_input)
+    expect(ui.get_mode).to eq("h")
+    expect(output.string).to include("The option is not valid. ")
   end
 
   it 'can display an error message' do

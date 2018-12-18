@@ -1,3 +1,7 @@
+require 'UI/Validator'
+require 'core/players/Human'
+require 'core/players/Easy_computer'
+
 class UI
   EMPTY = " "
   PART = "|"
@@ -8,21 +12,36 @@ class UI
   def initialize(stdout = $stdout, stdin = $stdin)
     @out = stdout
     @in = stdin
+    @validator = Validator.new
   end
 
-  def get_move
-    move = Integer @in.gets.chomp
-  rescue ArgumentError
-    show_error_message("Please insert a valid number ")
-    get_move
+  def get_position(board)
+    position = @in.gets.chomp
+    unless @validator.valid_move?(position, board)
+      @out.print("Please insert a valid position: ")
+      get_position(board)
+    else
+      position.to_i-1
+    end
   end
 
   def get_mode
-    @in.gets.chomp
+    @out.print "Please, introduce 'h' for human-human or 'e' for easy computer\n"
+    option = @in.gets.chomp
+    unless @validator.valid_mode?(option)
+      @out.print("The option is not valid. ")
+      get_mode
+    else
+      option.downcase
+    end
   end
 
   def draw_cell(board, position)
     board.get_content(position).nil? ? (position + 1).to_s : board.get_content(position)
+  end
+
+  def clear_screen
+    system "clear"
   end
 
   def show_grid board
@@ -44,16 +63,6 @@ class UI
     end
   end
 
-  def get_position
-    @out.print "Please insert the position "
-    get_move - 1
-  end
-
-  def get_game_mode
-    @out.print "Please, introduce 'h' for human-human or 'e' for easy computer "
-    get_mode
-  end
-
   def print_message message
     @out.print message
   end
@@ -67,6 +76,6 @@ class UI
     end
   end
 
-  private :get_move, :get_mode, :draw_cell
+  private :draw_cell
 
 end

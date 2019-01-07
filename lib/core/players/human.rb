@@ -9,8 +9,8 @@ class Human
     @ui = ui
   end
 
-  def get_position(board)
-    @ui.get_position(board)
+  def get_position(flow)
+    @ui.get_position(flow.board)
   end
 
 end

@@ -26,7 +26,7 @@ class UI
   end
 
   def get_mode
-    @out.print "Please, introduce 'h' for human-human or 'e' for easy computer\n"
+    @out.print "Please, introduce 'h' for human-human, 'e' for easy computer or 'i' for intelligent computer\n"
     option = @in.gets.chomp
     unless @validator.valid_mode?(option)
       @out.print("The option is not valid. ")

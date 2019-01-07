@@ -7,7 +7,8 @@ require 'core/flow'
 class Menu
   MODE = {
     :HUMAN_VS_HUMAN  => 'h',
-    :HUMAN_VS_EASY_COMPUTER  => 'e'
+    :HUMAN_VS_EASY_COMPUTER  => 'e',
+    :HUMAN_VS_HARD_COMPUTER  => 'i'
   }
 
   def initialize(ui)
@@ -30,12 +31,16 @@ class Menu
       when MODE[:HUMAN_VS_EASY_COMPUTER]
         players[0] = new_player.build(:human,"X",@ui)
         players[1] = new_player.build(:easy_computer,"O")
+      when MODE[:HUMAN_VS_HARD_COMPUTER]
+        players[0] = new_player.build(:human,"X",@ui)
+        players[1] = new_player.build(:hard_computer,"O")
       end
     players
   end
 
   def play
-    @flow = Flow.new(@ui, @players, 3)
+    board_size = 3
+    @flow = Flow.new(@ui, @players, board_size)
     @flow.start
   end
 

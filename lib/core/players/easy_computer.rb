@@ -7,8 +7,8 @@ class EasyComputer
     @symbol = symbol
   end
 
-  def get_position(board)
-    board.available_positions.sample
+  def get_position(flow)
+    flow.board.available_positions.sample
   end
 
 end

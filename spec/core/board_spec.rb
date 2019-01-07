@@ -26,6 +26,11 @@ describe Board do
     expect(board.get_content(1)).to be(nil)
   end
 
+  it 'can reset a cell' do
+    board.mark(4, "X")
+    expect(board.reset_cell(4)).to eq(nil)
+  end
+
   it 'can mark itself with a symbol' do
     board.mark(1, "X")
     expect(board.grid[1].content).to eq("X")

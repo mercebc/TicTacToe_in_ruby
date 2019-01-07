@@ -16,6 +16,25 @@ describe HardComputer do
     end
   end
 
+  it 'gets the best position of the best score' do
+    best_score = { 3 => 9, 5 => -8, 8 => 0 }
+    expect(intelligent_computer.best_position(best_score)).to eq(3)
+  end
+
+  it 'gets the highest score of the best score' do
+    best_score = { 3 => 9, 5 => -8, 8 => 0 }
+    expect(intelligent_computer.highest_score(best_score)).to eq(9)
+  end
+
+  it 'gets the lowest score of the best score' do
+    best_score = { 3 => 9, 5 => -8, 8 => 0 }
+    expect(intelligent_computer.lowest_score(best_score)).to eq(-8)
+  end
+
+  it 'gets the opponent player' do
+    expect(intelligent_computer.opponent(flow)).to be_a(Human)
+  end
+
   it 'computer wins' do
     mark_board([0, 3, 7], "O")
     mark_board([4, 6, 8], "X")

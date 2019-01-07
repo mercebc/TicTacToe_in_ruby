@@ -25,6 +25,10 @@ class Board
     !@grid[position].is_empty?
   end
 
+  def reset_cell(position)
+    @grid[position].content = nil
+  end
+
   def all_empty_cells
     @grid.find_all { |cell| cell.is_empty? }
   end

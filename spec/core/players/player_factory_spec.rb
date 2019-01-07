@@ -3,6 +3,7 @@ require 'core/players/player_factory'
 require 'UI/UI'
 require 'core/players/human'
 require 'core/players/easy_computer'
+require 'core/players/hard_computer'
 
 describe PlayerFactory do
 
@@ -15,6 +16,10 @@ describe PlayerFactory do
 
   it 'creates an Easy_computer' do
     expect(player_factory.build(:easy_computer,"X")).to be_a(EasyComputer)
+  end
+
+  it 'creates a Hard Computer' do
+    expect(player_factory.build(:hard_computer,"X")).to be_a(HardComputer)
   end
 
 end

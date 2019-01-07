@@ -23,7 +23,7 @@ class Flow
 
   def play_turn
     @ui.print_message("Player " + current_player.symbol + ", please insert a position: ")
-    position = current_player.get_position(@board)
+    position = current_player.get_position(self)
     @board.mark(position, current_player.symbol)
   end
 

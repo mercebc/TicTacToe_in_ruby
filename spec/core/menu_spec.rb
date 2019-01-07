@@ -21,4 +21,11 @@ describe Menu do
     expect(players[1]).to be_a(EasyComputer)
   end
 
+  it 'creates human-hard_computer players' do
+    mode = 'i'
+    players = menu.create_players(mode)
+    expect(players[0]).to be_a(Human)
+    expect(players[1]).to be_a(HardComputer)
+  end
+
 end

@@ -4,7 +4,7 @@ require 'core/board'
 class Validator
 
   def valid_mode?(option)
-    regex = Regexp.new("^([e|E|h|H])$")
+    regex = Regexp.new("^([e|E|h|H|i|I])$")
     regex.match(option).nil? ? false : true
   end
 

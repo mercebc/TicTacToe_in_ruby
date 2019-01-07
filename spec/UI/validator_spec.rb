@@ -16,12 +16,16 @@ describe Validator do
     expect(validator.valid_mode?("e")).to eq(true)
   end
 
-  it 'game mode option "H" is valid' do
-    expect(validator.valid_mode?("H")).to eq(true)
+  it 'game mode option "h" is valid' do
+    expect(validator.valid_mode?("h")).to eq(true)
   end
 
   it 'game mode option "H" is valid' do
     expect(validator.valid_mode?("H")).to eq(true)
+  end
+
+  it 'game mode option "i" is valid' do
+    expect(validator.valid_mode?("i")).to eq(true)
   end
 
   it 'position is valid' do

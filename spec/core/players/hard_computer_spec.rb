@@ -1,6 +1,7 @@
 require 'rspec'
 require 'core/players/hard_computer'
 require 'core/board'
+require 'core/flow'
 
 describe HardComputer do
 
@@ -10,8 +11,8 @@ describe HardComputer do
   let(:players) {[intelligent_computer, human]}
   let(:flow) { Flow.new(ui, players, 3) }
 
-  def mark_board(marks, symbol)
-    marks.each do |position|
+  def mark_board(marks)
+    marks.each_with_index do |symbol, position|
       flow.board.mark(position, symbol)
     end
   end
@@ -35,32 +36,47 @@ describe HardComputer do
     expect(intelligent_computer.opponent(flow)).to be_a(Human)
   end
 
-  it 'computer wins' do
-    mark_board([0, 3, 7], "O")
-    mark_board([4, 6, 8], "X")
+  it 'wins' do
+    mark_board([
+      "O", nil, nil,
+      "O", "X", nil,
+      "X", "O", "X"
+    ])
     expect(intelligent_computer.get_position(flow)).to eq(2)
   end
-  it 'avoid human player to win' do
-    mark_board([1, 2, 5], "O")
-    mark_board([0, 3], "X")
+  it 'wins over avoiding human player to win' do
+    mark_board([
+      "X", "O", "O",
+      "X", nil, "O",
+      nil, nil, nil
+    ])
     expect(intelligent_computer.get_position(flow)).to eq(6)
   end
 
-  it 'computer wins and human player starts' do
-    mark_board([0, 7], "O")
-    mark_board([4, 6, 8], "X")
+  it 'computer wins when human player starts' do
+    mark_board([
+      "O", nil, nil,
+      nil, "X", nil,
+      "X", "O", "X"
+    ])
     expect(intelligent_computer.get_position(flow)).to eq(2)
   end
 
-  it 'avoid human player to win and human player starts' do
-    mark_board([1, 4], "O")
-    mark_board([0], "X")
+  it 'avoid human player to win' do
+    mark_board([
+      "X", "O", nil,
+      nil, "O", nil,
+      nil, nil, nil
+    ])
     expect(intelligent_computer.get_position(flow)).to eq(7)
   end
 
   it 'computer wins over avoiding player to win' do
-    mark_board([3, 4], "O")
-    mark_board([6, 7], "X")
+    mark_board([
+      nil, nil, nil,
+      "O", "O", nil,
+      "X", "X", nil
+    ])
     expect(intelligent_computer.get_position(flow)).to eq(8)
   end
 end

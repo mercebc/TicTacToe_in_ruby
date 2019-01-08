@@ -1,12 +1,10 @@
 require 'core/board'
-require 'UI/UI'
 
 class HardComputer
   attr_accessor :symbol
 
   def initialize(symbol)
     @symbol = symbol
-    @ui = UI.new
   end
 
   def get_position(flow)

@@ -106,4 +106,49 @@ describe UI do
     ui.announce_results(board, players)
     expect(output.string).to eq("X has won")
   end
+
+  it 'can welcome the user' do
+    ui = UI.new(output, StringIO.new)
+    ui.welcome
+    expect(output.string).to eq("Welcome to Tic Tac Toe\n")
+  end
+
+  it 'chooses to play a saved game' do
+    user_input = StringIO.new("y")
+    ui = UI.new(output, user_input)
+    expect(ui.play_saved_game).to eq(true)
+  end
+
+  it 'chooses not to play a saved game' do
+    user_input = StringIO.new("N")
+    ui = UI.new(output, user_input)
+    expect(ui.play_saved_game).to eq(false)
+  end
+
+  it 'gets a new game name' do
+    user_input = StringIO.new("my_game")
+    ui = UI.new(output, user_input)
+    expect(ui.get_new_name).to eq("my_game")
+  end
+
+  it 'cant get a new game name that already exists' do
+    user_input = StringIO.new("merce\nmy_game")
+    ui = UI.new(output, user_input)
+    ui.get_new_name
+    expect(output.string).to include("The name is not valid. ")
+  end
+
+  it 'asks for an existent game name' do
+    user_input = StringIO.new("merce")
+    ui = UI.new(output, user_input)
+    expect(ui.get_game_name).to eq("merce")
+  end
+
+  it 'cant get a game name that doesnt already exists' do
+    user_input = StringIO.new("my_game\nmerce")
+    ui = UI.new(output, user_input)
+    ui.get_game_name
+    expect(output.string).to include("The name is not valid. ")
+  end
+
 end

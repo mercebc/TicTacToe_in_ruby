@@ -48,4 +48,16 @@ class Flow
     @players.last
   end
 
+  def order_players(gameDAO)
+    if gameDAO.current_player != current_player.symbol
+      swap_players
+    end
+  end
+
+  def load_board(cellsDAO)
+    cellsDAO.each do |cell|
+      @board.mark(cell.position, cell.content)
+    end
+  end
+
 end

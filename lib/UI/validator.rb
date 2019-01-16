@@ -1,6 +1,5 @@
 require 'UI/UI'
 require 'core/board'
-require 'database/game_dao'
 
 class Validator
 
@@ -16,14 +15,5 @@ class Validator
     true
   end
 
-  def existent_game_name?(name, connection)
-    return false if GameDAO.find(name, connection).nil?
-    true
-  end
-
-  def valid_yN?(answer)
-    regex = Regexp.new("^([y|Y|n|N])$")
-    regex.match(answer).nil? ? false : true
-  end
 end
 

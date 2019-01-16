@@ -3,9 +3,6 @@ GEM
   specs:
     diff-lcs (1.3)
     o_stream_catcher (0.0.1)
-    pg (0.21.0)
-    pg_tester (0.1.0)
-      pg (~> 0.18, >= 0.18.2)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -25,8 +22,6 @@ PLATFORMS
 
 DEPENDENCIES
   o_stream_catcher
-  pg
-  pg_tester
   rspec (~> 3.0)
 
 BUNDLED WITH

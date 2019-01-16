@@ -41,12 +41,4 @@ describe Validator do
     expect(validator.valid_move?("4", board)).to eq(false)
   end
 
-  it 'name of the game is already in the database' do
-    expect(validator.existent_game_name?('merce')).to eq(true)
-  end
-
-  it 'name of the game is not already in the database' do
-    expect(validator.existent_game_name?('my_game')).to eq(false)
-  end
-
 end

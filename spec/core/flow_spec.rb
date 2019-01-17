@@ -16,15 +16,15 @@ describe Flow do
       end
     end
 
-  it 'current player is the first player in the array' do
+  it 'has a current player X' do
     expect(flow.current_player.symbol).to eq("X")
   end
 
-  it 'opponent is the last player in the array' do
+  it 'has an opponent O' do
     expect(flow.opponent.symbol).to eq("O")
   end
 
-  it 'swap players in the array' do
+  it 'can swap players' do
     flow.swap_players
     expect(flow.current_player.symbol).to eq("O")
     expect(flow.opponent.symbol).to eq("X")
@@ -38,6 +38,11 @@ describe Flow do
   it 'game is not over' do
     mark_board([0, 2, 8])
     expect(flow.game_over).to be(false)
+  end
+
+  it 'has a winner X' do
+    mark_board([0, 1, 2])
+    expect(flow.winner).to eq(players[0])
   end
 
 end

@@ -1,5 +1,6 @@
 require 'UI/UI'
 require 'core/players/player_factory'
+require 'core/players_factory'
 require 'core/players/human'
 require 'core/players/easy_computer'
 require 'core/flow'
@@ -23,8 +24,8 @@ class Setup
   def play
     board = create_board
     players = create_players
-    @flow = Flow.new(@ui, players, board)
-    @flow.start
+    flow = Flow.new(@ui, players, board)
+    flow.start
   end
 
 end

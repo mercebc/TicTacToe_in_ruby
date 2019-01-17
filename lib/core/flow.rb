@@ -1,5 +1,6 @@
 require 'UI/UI'
 require 'core/board'
+require 'core/players/human'
 
 class Flow
   attr_reader :ui, :board, :players
@@ -13,6 +14,7 @@ class Flow
   def start
     @ui.display_grid(@board)
     until game_over do
+      if current_player.is_a?(Human) then @ui.display_insert_position(current_player) end
       play_turn
       @ui.clear_screen
       @ui.display_turn(current_player, @board)
@@ -22,7 +24,6 @@ class Flow
   end
 
   def play_turn
-    @ui.print_message("Player " + current_player.symbol + ", please insert a position: ")
     position = current_player.get_position(self)
     @board.mark(position, current_player.symbol)
   end

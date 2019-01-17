@@ -44,8 +44,11 @@ class UI
     system "clear"
   end
 
+  def display_message(message)
+    @out.print message
+  end
 
-  def display_grid board
+  def display_grid(board)
     position = 0
     size = board.size
     for row in 1..size do
@@ -65,11 +68,11 @@ class UI
 
   def display_turn(current_player, board)
     @out.print("Player " + current_player.symbol + "'s turn:\n")
-    display_grid(@board)
+    display_grid(board)
   end
 
-  def display_message message
-    @out.print message
+  def display_insert_position(current_player)
+    @out.print("Player " + current_player.symbol + ", please insert a position: ")
   end
 
   def announce_winner(winner)

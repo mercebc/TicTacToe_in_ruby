@@ -9,7 +9,8 @@ describe HardComputer do
   let(:human) { Human.new("O", ui) }
   let(:ui) { UI.new }
   let(:players) {[intelligent_computer, human]}
-  let(:flow) { Flow.new(ui, players, 3) }
+  let(:board) { Board.new(3) }
+  let(:flow) { Flow.new(ui, players, board) }
 
   def mark_board(marks)
     marks.each_with_index do |symbol, position|

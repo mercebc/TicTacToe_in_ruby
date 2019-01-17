@@ -1,10 +1,6 @@
-require 'UI/UI'
 require 'core/players/player_factory'
-require 'core/players/human'
-require 'core/players/easy_computer'
-require 'core/flow'
 
-class Menu
+class PlayersFactory
   MODE = {
     :HUMAN_VS_HUMAN  => 'h',
     :HUMAN_VS_EASY_COMPUTER  => 'e',
@@ -15,13 +11,7 @@ class Menu
     @ui = ui
   end
 
-  def setup
-    mode = @ui.get_mode
-    @players = create_players(mode)
-    play
-  end
-
-  def create_players(mode)
+  def build(mode)
     new_player = PlayerFactory.new
     players = Array.new
     case mode
@@ -37,11 +27,4 @@ class Menu
       end
     players
   end
-
-  def play
-    board_size = 3
-    @flow = Flow.new(@ui, @players, board_size)
-    @flow.start
-  end
-
 end

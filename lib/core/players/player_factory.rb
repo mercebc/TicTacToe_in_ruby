@@ -8,7 +8,6 @@ class PlayerFactory
     :easy_computer => EasyComputer,
     :hard_computer => HardComputer
   }
-  private_constant :PLAYERS
 
   def build(type, symbol, ui=nil)
     case type

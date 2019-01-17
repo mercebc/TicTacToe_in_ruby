@@ -7,11 +7,12 @@ describe Flow do
 
     let(:ui) { UI.new }
     let(:players) {[Human.new("X", ui), EasyComputer.new("O")]}
-    let(:flow) { Flow.new(ui, players, 3) }
+    let(:board) { Board.new(3) }
+    let(:flow) { Flow.new(ui, players, board) }
 
     def mark_board(marks)
       marks.each do |position|
-        flow.board.mark(position, "X")
+        board.mark(position, "X")
       end
     end
 

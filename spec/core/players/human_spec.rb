@@ -7,6 +7,7 @@ describe Human do
 
     let(:output) { StringIO.new }
     let(:ui) { UI.new }
+    let(:board) { Board.new(3) }
 
   it 'plays her/his turn' do
     user_input = StringIO.new("4")
@@ -14,7 +15,7 @@ describe Human do
     human_player = Human.new("X", user_ui)
     players = [human_player, EasyComputer.new("O")]
 
-    flow = Flow.new(ui, players, 3)
+    flow = Flow.new(ui, players, board)
     expect(human_player.get_position(flow)).to eq(3)
   end
 

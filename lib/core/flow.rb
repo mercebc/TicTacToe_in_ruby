@@ -4,36 +4,27 @@ require 'core/board'
 class Flow
   attr_reader :ui, :board, :players
 
-  def initialize (ui, players, board_size)
+  def initialize (ui, players, board)
     @ui = ui
-    @board = Board.new(board_size)
+    @board = board
     @players = players
   end
 
   def start
-    @ui.show_grid(@board)
+    @ui.display_grid(@board)
     until game_over do
       play_turn
       @ui.clear_screen
-      display_turn
+      @ui.display_turn(current_player, @board)
       swap_players
     end
-    @ui.announce_results(@board, @players)
+    game_results
   end
 
   def play_turn
     @ui.print_message("Player " + current_player.symbol + ", please insert a position: ")
     position = current_player.get_position(self)
     @board.mark(position, current_player.symbol)
-  end
-
-  def display_turn
-    @ui.print_message("Player " + current_player.symbol + "'s turn:\n")
-    @ui.show_grid(@board)
-  end
-
-  def game_over
-    @board.tie? or @board.win?(@players)
   end
 
   def swap_players
@@ -46,6 +37,22 @@ class Flow
 
   def opponent
     @players.last
+  end
+
+  def game_over
+    @board.tie? or @board.win?(@players)
+  end
+
+  def winner
+    @players.select { |player| @board.winner?(player) }.first
+  end
+
+  def game_results
+    if @board.win?(@players)
+      @ui.announce_winner(winner)
+    else
+      @ui.announce_tie
+    end
   end
 
 end

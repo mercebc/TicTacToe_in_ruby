@@ -44,10 +44,10 @@ class UI
     system "clear"
   end
 
-  def show_grid board
+
+  def display_grid board
     position = 0
     size = board.size
-
     for row in 1..size do
       for col in 1..size do
         @out.print EMPTY + draw_cell(board, position) + EMPTY
@@ -63,17 +63,21 @@ class UI
     end
   end
 
-  def print_message message
+  def display_turn(current_player, board)
+    @out.print("Player " + current_player.symbol + "'s turn:\n")
+    display_grid(@board)
+  end
+
+  def display_message message
     @out.print message
   end
 
-  def announce_results(board, players)
-    if board.win?(players)
-      winner = players.select { |player| board.winner?(player) }.first
-      print_message(winner.symbol + " has won")
-    else
-      print_message("It's a tie")
-    end
+  def announce_winner(winner)
+    @out.print(winner.symbol + " has won")
+  end
+
+  def announce_tie
+    @out.print("It's a tie")
   end
 
   private :draw_cell

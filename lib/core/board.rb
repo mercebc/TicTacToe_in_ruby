@@ -6,7 +6,7 @@ class Board
   def initialize(board_size)
     @size = board_size
     @capacity = size*size
-    @grid = Array.new(capacity) {Cell.new()}
+    @grid = Array.new(capacity) { Cell.new() }
   end
 
   def mark(position, symbol)

@@ -6,7 +6,8 @@ require 'core/game'
 
 class TTT
   def initialize
-    Game.new
+    game = Game.new
+    game.start
   end
 end
 

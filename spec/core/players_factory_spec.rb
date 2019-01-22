@@ -29,4 +29,11 @@ describe PlayersFactory do
     expect(players[1]).to be_a(HardComputer)
   end
 
+  it 'order the players' do
+    mode = 'i'
+    players = playersFactory.build(mode, "O")
+    expect(players[0]).to be_a(HardComputer)
+    expect(players[1]).to be_a(Human)
+  end
+
 end

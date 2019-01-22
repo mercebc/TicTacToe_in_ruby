@@ -1,17 +1,27 @@
 require 'UI/UI'
-require 'core/players/player_factory'
 require 'core/players_factory'
-require 'core/players/human'
-require 'core/players/easy_computer'
-require 'core/flow'
+require 'core/board'
 
 class Setup
   def initialize(ui)
     @ui = ui
   end
 
-  def create_players
+  def build
+    setup = Array.new
     mode = @ui.get_mode
+    setup << mode
+    setup << create_flow(mode)
+    setup
+  end
+
+  def create_flow(mode)
+    board = create_board
+    players = create_players(mode)
+    Flow.new(@ui, players, board)
+  end
+
+  def create_players(mode)
     playersFactory = PlayersFactory.new(@ui)
     playersFactory.build(mode)
   end
@@ -19,13 +29,6 @@ class Setup
   def create_board
     board_size = 3
     Board.new(board_size)
-  end
-
-  def play
-    board = create_board
-    players = create_players
-    flow = Flow.new(@ui, players, board)
-    flow.start
   end
 
 end

@@ -36,6 +36,28 @@ class UI
     end
   end
 
+  def get_name
+    @out.print "Please write the name of the game you want to continue playing: \n"
+    name = @in.gets.chomp
+    #unless @validator.valid_name?(name)
+    #  @out.print("The name is not valid. ")
+    #  get_name
+    #else
+      name.downcase
+    #end
+  end
+
+  def load_game?
+    @out.print "Do you want to play a saved game? [y/N]\n"
+    option = @in.gets.chomp
+    unless @validator.valid_yn?(option)
+      @out.print("The option is not valid. ")
+      load_game?
+    else
+      option.downcase == "y" ? true : false
+    end
+  end
+
   def draw_cell(board, position)
     board.get_content(position).nil? ? (position + 1).to_s : board.get_content(position)
   end
@@ -73,6 +95,12 @@ class UI
 
   def display_insert_position(current_player)
     @out.print("Player " + current_player.symbol + ", please insert a position: ")
+  end
+
+  def display_saved_games(all_names)
+    all_names.each do |name|
+      @out.print(name + "\n")
+    end
   end
 
   def announce_winner(winner)
